@@ -163,13 +163,17 @@ public class MainActivity extends AppCompatActivity {
         pDialogConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setProfile(path);
-                SharedPreferences prefs = getApplication().getSharedPreferences("profilePath", Context.MODE_PRIVATE);
+                SharedPreferences prefs = getApplication().getSharedPreferences("onBoot", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
+                editor.putBoolean("onBoot", false);
+                editor.apply();
+                setProfile(path);
+                SharedPreferences profPath = getApplication().getSharedPreferences("profilePath", Context.MODE_PRIVATE);
+                SharedPreferences.Editor paths = profPath.edit();
                 SharedPreferences prof = getApplication().getSharedPreferences("profile", Context.MODE_PRIVATE);
                 SharedPreferences.Editor peditor = prof.edit();
-                editor.putString("profilePath", path);
-                editor.apply();
+                paths.putString("profilePath", path);
+                paths.apply();
                 peditor.putString("profile", "custom");
                 peditor.apply();
                 pDialog.dismiss();
