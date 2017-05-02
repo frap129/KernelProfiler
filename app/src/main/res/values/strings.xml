@@ -4,7 +4,7 @@
         "To get started, click the Plus button to load a custom kernel profile file."
         "If your device is supported, you can select one of the bundled profiles below instead."
     </string>
-    <string name="action_about">Settings</string>
+    <string name="action_about">About</string>
     <string name="cancelText">Cancel</string>
     <string name="confirmText">OK</string>
     <string name="profileConfirm">Are you sure you want to load this file?</string>
