@@ -176,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
                 paths.apply();
                 peditor.putString("profile", "custom");
                 peditor.apply();
+                Snackbar.make(findViewById(android.R.id.content), "Profile applied!", Snackbar.LENGTH_SHORT).show();
                 pDialog.dismiss();
             }
         });
