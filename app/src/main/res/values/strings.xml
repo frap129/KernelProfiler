@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Kernel Profiler</string>
     <string name="info_text">
-        "To get started, click the Plus button to load a custom kernel profile file."
+        "To get started, click the \"plus\" button to load a custom kernel profile file."
         "If your device is supported, you can select one of the bundled profiles below instead."
     </string>
     <string name="action_about">About</string>
