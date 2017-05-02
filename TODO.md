@@ -1,3 +1,3 @@
 ## To do list
-* Block functionality on permissions fail
-*
+* Show File name in profile dialog
+* Add dynamic filename snackbar after apply
