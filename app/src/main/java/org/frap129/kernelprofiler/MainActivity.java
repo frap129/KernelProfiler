@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         final Switch applyOnBoot = (Switch) findViewById(R.id.boot);
         SharedPreferences boot = getApplication().getSharedPreferences("onBoot", Context.MODE_PRIVATE);
 
+        // Make sure apply on boot shows the correct state
         applyOnBoot.setChecked(boot.getBoolean("onBoot", false));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -87,11 +88,11 @@ public class MainActivity extends AppCompatActivity {
                 if (applyOnBoot.isChecked()) {
                     editor.putBoolean("onBoot", true);
                     editor.apply();
-                    Snackbar.make(findViewById(android.R.id.content), "Profile will be applied on boot.", Snackbar.LENGTH_SHORT).show();
+                    snack("Profile will be applied on boot.");
                 } else {
                     editor.putBoolean("onBoot", false);
                     editor.apply();
-                    Snackbar.make(findViewById(android.R.id.content), "Profile won't be applied on boot.", Snackbar.LENGTH_SHORT).show();
+                    snack("Profile won't be applied on boot.");
                 }
             }
         });
@@ -176,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 paths.apply();
                 peditor.putString("profile", "custom");
                 peditor.apply();
-                Snackbar.make(findViewById(android.R.id.content), "Profile applied!", Snackbar.LENGTH_SHORT).show();
+                snack("Profile applied!");
                 pDialog.dismiss();
             }
         });
@@ -305,8 +306,7 @@ public class MainActivity extends AppCompatActivity {
                 if (selectedFilePath != null) {
                     profileDialog(selectedFilePath);
                 } else {
-                    Snackbar.make(findViewById(android.R.id.content), "Invalid file path.", Snackbar.LENGTH_LONG).show();
-
+                    snack("Invalid file path");
                 }
             }
         }
@@ -317,13 +317,13 @@ public class MainActivity extends AppCompatActivity {
         if (!Shell.SU.available()) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this, android.R.style.Theme_Material);
             dialog.setTitle("Root access not available");
-            dialog.setMessage("Please root your device and/or grant root access to Spectrum.");
+            dialog.setMessage("Please root your device and/or grant root access to Kernel Profiler.");
             dialog.setCancelable(false);
             AlertDialog root = dialog.create();
             root.show();
             return false;
         } else
-            Snackbar.make(findViewById(android.R.id.content), "Root access granted!", Snackbar.LENGTH_SHORT).show();
+            snack("Root access granted!");
             return true;
     }
 
@@ -347,5 +347,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         permDialog.show();
+    }
+
+    // Method to create and theme a Snackbar
+    private void snack(String text) {
+        Snackbar snack = Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_LONG);
+        snack.getView().setBackgroundColor(getResources().getColor(R.color.colorPrimary, this.getTheme()));
+        snack.show();
     }
 }
