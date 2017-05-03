@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "org.frap129.kernelprofiler"
         minSdkVersion 23
@@ -12,6 +12,10 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
