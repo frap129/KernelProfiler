@@ -12,6 +12,10 @@
     <string name="fileSelect">Select a File</string>
     <string name="bootText">Apply profile on boot</string>
     <string name="profileMenu">Profile loader</string>
+    
+    <!-- Profiles and Authors -->
+    <string name="glassfish">GlassFish 1.2</string>
+    <string name="sonicron">Created by soniCron</string>
 
     <!-- Shared Preferences -->
     <string name="onBoot">false</string>

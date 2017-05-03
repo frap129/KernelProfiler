@@ -21,16 +21,21 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import eu.chainfire.libsuperuser.Shell;
@@ -53,11 +58,25 @@ public class MainActivity extends AppCompatActivity {
         if (!checkSU())
             return;
 
+        // Make sure apply on boot shows the correct state
         final Switch applyOnBoot = (Switch) findViewById(R.id.boot);
         SharedPreferences boot = getApplication().getSharedPreferences("onBoot", Context.MODE_PRIVATE);
-
-        // Make sure apply on boot shows the correct state
         applyOnBoot.setChecked(boot.getBoolean("onBoot", false));
+
+        // Set current profile text
+        SharedPreferences prof = getApplication().getSharedPreferences("profile", Context.MODE_PRIVATE);
+        TextView info = (TextView) findViewById(R.id.infoText);
+        String profile = prof.getString("profile", null);
+        if (profile != null && !profile.isEmpty()) {
+            String curProfile = "Current Profile: " + profile;
+            info.setText(curProfile);
+            info.setTextSize(20);
+        }
+
+        // Set device name in profiles
+        TextView device = (TextView) findViewById(R.id.device);
+        String deviceString =  "Profiles for " + android.os.Build.MODEL;
+        device.setText(deviceString);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +115,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        CardView prof0 = (CardView) findViewById(R.id.profCard0);
+
+        prof0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setBundled("GlassFish 1.2", R.raw.glassfish);
+            }
+        });
     }
 
     @Override
@@ -121,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     // Method that parses profile file
-    public static void setProfile(final String path) {
+    public static void setProfile(final String path, final Context context) {
         new AsyncTask<Object, Object, Void>() {
             @Override
             protected Void doInBackground(Object... params) {
@@ -148,6 +176,38 @@ public class MainActivity extends AppCompatActivity {
         }.execute();
     }
 
+    // Method that parses profile file
+    public static void setProfile(final int res, final Context context) {
+        if (res == 0)
+            return;
+
+        new AsyncTask<Object, Object, Void>() {
+            @Override
+            protected Void doInBackground(Object... params) {
+                try {
+                    InputStream fstream = context.getResources().openRawResource(res);
+                    BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+                    String strLine;
+                    String exec = "write() { echo -n $2 > $1; };";
+
+                    while ((strLine = br.readLine()) != null) {
+                        exec = exec + " write " + strLine + ";";
+                    }
+
+                    Shell.SU.run(exec);
+
+                    br.close();
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }.execute();
+    }
+
+
     // Method that prompts the user for confirmation
     protected void profileDialog(final String path){
         final Dialog pDialog = new Dialog(MainActivity.this);
@@ -168,15 +228,21 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putBoolean("onBoot", false);
                 editor.apply();
-                setProfile(path);
+                setProfile(path, MainActivity.this);
                 SharedPreferences profPath = getApplication().getSharedPreferences("profilePath", Context.MODE_PRIVATE);
                 SharedPreferences.Editor paths = profPath.edit();
                 SharedPreferences prof = getApplication().getSharedPreferences("profile", Context.MODE_PRIVATE);
                 SharedPreferences.Editor peditor = prof.edit();
                 paths.putString("profilePath", path);
                 paths.apply();
-                peditor.putString("profile", "custom");
+                File profileFile = new File(path);
+                String name = profileFile.getName().replace(MimeTypeMap.getFileExtensionFromUrl(path), "").replace(".", "");
+                peditor.putString("profile", name);
                 peditor.apply();
+                TextView info = (TextView) findViewById(R.id.infoText);
+                String curProfile = "Current Profile: " + name;
+                info.setText(curProfile);
+                info.setTextSize(20);
                 snack("Profile applied!");
                 pDialog.dismiss();
             }
@@ -355,4 +421,27 @@ public class MainActivity extends AppCompatActivity {
         snack.getView().setBackgroundColor(getResources().getColor(R.color.colorPrimary, this.getTheme()));
         snack.show();
     }
+
+    // Method that sets bundled profiles
+    private void setBundled(String name, final int res) {
+        SharedPreferences prefs = getApplication().getSharedPreferences("onBoot", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("onBoot", false);
+        editor.apply();
+        setProfile(res, this);
+        SharedPreferences profPath = getApplication().getSharedPreferences("profilePath", Context.MODE_PRIVATE);
+        SharedPreferences.Editor paths = profPath.edit();
+        SharedPreferences prof = getApplication().getSharedPreferences("profile", Context.MODE_PRIVATE);
+        SharedPreferences.Editor peditor = prof.edit();
+        paths.putInt("profilePath", res);
+        paths.apply();
+        peditor.putString("profile", name);
+        peditor.apply();
+        TextView info = (TextView) findViewById(R.id.infoText);
+        String curProfile = "Current Profile: " + name;
+        info.setText(curProfile);
+        info.setTextSize(20);
+        snack("Profile applied!");
+    }
+
 }
