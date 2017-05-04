@@ -538,6 +538,15 @@ public class MainActivity extends AppCompatActivity {
                     setBundled("MadDog", R.raw.maddog5x);
                 }
             });
+        } else if (device.contains("Nexus G4")) {
+            CardView glassCannon = (CardView) findViewById(R.id.glassCannon);
+            glassCannon.setVisibility(View.VISIBLE);
+            glassCannon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setBundled("GlassCannon", R.raw.glasscannon5x);
+                }
+            });
         }
     }
 
