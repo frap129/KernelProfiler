@@ -11,6 +11,7 @@
     <string name="permText">Storage Permissions are required. Click OK to reshow permissions dialog.</string>
     <string name="fileSelect">Select a File</string>
     <string name="bootText">Apply profile on boot</string>
+    <string name="bootNotiText">Show notification after profile applied on boot</string>
     <string name="profileMenu">Profile loader</string>
     
     <!-- Profiles and Authors -->
@@ -26,6 +27,7 @@
 
     <!-- Shared Preferences -->
     <string name="onBoot">false</string>
+    <string name="onBootNoti">true</string>
     <string name="profile"/>
     <string name="profilePath"/>
 </resources>

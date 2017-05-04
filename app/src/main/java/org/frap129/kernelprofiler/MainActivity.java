@@ -58,10 +58,13 @@ public class MainActivity extends AppCompatActivity {
         if (!checkSU())
             return;
 
-        // Make sure apply on boot shows the correct state
+        // Make sure boot switches shows the correct state
         final Switch applyOnBoot = (Switch) findViewById(R.id.boot);
         SharedPreferences boot = getApplication().getSharedPreferences("onBoot", Context.MODE_PRIVATE);
+        final Switch notiOnBoot = (Switch) findViewById(R.id.bootNoti);
+        SharedPreferences bootNoti = getApplication().getSharedPreferences("onBootNoti", Context.MODE_PRIVATE);
         applyOnBoot.setChecked(boot.getBoolean("onBoot", false));
+        notiOnBoot.setChecked(bootNoti.getBoolean("onBootNoti", true));
 
         // Set current profile text
         SharedPreferences prof = getApplication().getSharedPreferences("profile", Context.MODE_PRIVATE);
@@ -112,6 +115,24 @@ public class MainActivity extends AppCompatActivity {
                     editor.putBoolean("onBoot", false);
                     editor.apply();
                     snack("Profile won't be applied on boot.");
+                }
+            }
+        });
+
+        notiOnBoot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences prefs = getApplication().getSharedPreferences("onBootNoti", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+
+                if (notiOnBoot.isChecked()) {
+                    editor.putBoolean("onBootNoti", true);
+                    editor.apply();
+                    snack("Notification will be sent on boot.");
+                } else {
+                    editor.putBoolean("onBootNoti", false);
+                    editor.apply();
+                    snack("Notification won't be sent on boot.");
                 }
             }
         });
@@ -451,7 +472,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Method that handles device and creates cards
     private void deviceCards(String device) {
-        if (device.contains("Nexus 6P")) {
+        if (device.contains("Nexus 6d")) {
             CardView glassCannon = (CardView) findViewById(R.id.glassCannon);
             glassCannon.setVisibility(View.VISIBLE);
             glassCannon.setOnClickListener(new View.OnClickListener() {

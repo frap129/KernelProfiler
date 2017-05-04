@@ -8,7 +8,7 @@
     tools:context="org.frap129.kernelprofiler.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -22,6 +22,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:layout_alignParentTop="true"
             android:clickable="true"
             app:cardElevation="@dimen/card_elevation"
             app:contentPadding="18dp">
@@ -40,6 +41,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:layout_below="@id/infoCard"
             android:clickable="true"
             app:cardElevation="@dimen/card_elevation"
             app:contentPadding="18dp">
@@ -47,8 +49,17 @@
                 android:id="@+id/boot"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_gravity="center"
+                android:layout_gravity="top"
+                android:layout_marginBottom="32dp"
                 android:text="@string/bootText"
+                android:textColor="@android:color/white"/>
+            <Switch
+                android:id="@+id/bootNoti"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="32dp"
+                android:text="@string/bootNotiText"
                 android:textColor="@android:color/white"/>
         </android.support.v7.widget.CardView>
 
@@ -57,8 +68,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:layout_below="@id/bootCard"
             android:clickable="true"
             app:cardElevation="@dimen/card_elevation"
             app:contentPadding="18dp">
@@ -74,10 +87,11 @@
             android:id="@+id/glassCannon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:layout_below="@id/deviceCard"
             android:clickable="true"
             app:cardElevation="@dimen/card_elevation"
             app:contentPadding="18dp"
@@ -103,14 +117,17 @@
             android:id="@+id/drunkSauceLite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:layout_below="@id/glassCannon"
             android:clickable="true"
             app:cardElevation="@dimen/card_elevation"
             app:contentPadding="18dp"
             android:visibility="gone">
             <TextView
+                android:id="@+id/drunkSauceLiteTitle"
                 android:layout_marginBottom="20dp"
                 android:layout_gravity="top"
                 android:layout_width="wrap_content"
@@ -123,6 +140,7 @@
                 android:layout_marginStart="2dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/drunkSauceLiteTitle"
                 android:textSize="14sp"
                 android:text="@string/alcolawl"/>
         </android.support.v7.widget.CardView>
@@ -131,9 +149,11 @@
             android:id="@+id/wingoku"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:layout_below="@id/drunkSauceLite"
             android:clickable="true"
             app:cardElevation="@dimen/card_elevation"
             app:contentPadding="18dp"
@@ -159,9 +179,11 @@
             android:id="@+id/ghostPepper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:layout_below="@id/wingoku"
             android:clickable="true"
             app:cardElevation="@dimen/card_elevation"
             app:contentPadding="18dp"
@@ -187,9 +209,11 @@
             android:id="@+id/profCard0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:layout_below="@id/ghostPepper"
             android:clickable="true"
             app:cardElevation="@dimen/card_elevation"
             app:contentPadding="18dp">
@@ -210,6 +234,6 @@
                 android:text="@string/sonicron"/>
         </android.support.v7.widget.CardView>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </android.support.v4.widget.NestedScrollView>
