@@ -13,10 +13,21 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title" />
 
+    <TextView
+        android:id="@+id/pFileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textColor="@android:color/secondary_text_dark"
+        android:layout_below="@+id/pDialogHint"
+        android:layout_centerHorizontal="true" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/pDialogHint"
+        android:layout_below="@id/pFileName"
         android:layout_alignParentStart="true"
         android:id="@+id/pDialogCancel"
         android:text="@string/cancelText"
@@ -27,7 +38,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/pDialogHint"
+        android:layout_below="@id/pFileName"
         android:layout_alignParentEnd="true"
         android:id="@+id/pDialogConfirm"
         android:text="@string/confirmText"

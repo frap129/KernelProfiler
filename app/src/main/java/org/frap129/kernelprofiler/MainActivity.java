@@ -214,8 +214,11 @@ public class MainActivity extends AppCompatActivity {
     // Method that prompts the user for confirmation
     protected void profileDialog(final String path){
         final Dialog pDialog = new Dialog(MainActivity.this);
-        pDialog.setTitle("Profile Loader");
         pDialog.setContentView(R.layout.profile_dialog);
+        File profileFile = new File(path);
+        final String fileName = profileFile.getName();
+        TextView pFileName = (TextView) pDialog.findViewById(R.id.pFileName);
+        pFileName.setText(fileName);
         Button pDialogCancel = (Button) pDialog.findViewById(R.id.pDialogCancel);
         pDialogCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,8 +241,7 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor peditor = prof.edit();
                 paths.putString("profilePath", path);
                 paths.apply();
-                File profileFile = new File(path);
-                String name = profileFile.getName().replace(MimeTypeMap.getFileExtensionFromUrl(path), "").replace(".", "");
+                String name = fileName.replace(MimeTypeMap.getFileExtensionFromUrl(path), "").replace(".", "");
                 peditor.putString("profile", name);
                 peditor.apply();
                 TextView info = (TextView) findViewById(R.id.infoText);
@@ -420,8 +422,8 @@ public class MainActivity extends AppCompatActivity {
 
     // Method to create and theme a Snackbar
     private void snack(String text) {
-        Snackbar snack = Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_LONG);
-        snack.getView().setBackgroundColor(getResources().getColor(R.color.colorPrimary, this.getTheme()));
+        Snackbar snack = Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_SHORT);
+        snack.getView().setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark, this.getTheme()));
         snack.show();
     }
 
