@@ -124,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
                 setBundled("GlassFish 1.2", R.raw.glassfish);
             }
         });
+
+        // Create device specific profile cards
+        deviceCards(android.os.Build.MODEL);
     }
 
     @Override
@@ -442,6 +445,44 @@ public class MainActivity extends AppCompatActivity {
         info.setText(curProfile);
         info.setTextSize(20);
         snack("Profile applied!");
+    }
+
+    // Method that handles device and creates cards
+    private void deviceCards(String device) {
+        if (device.contains("Nexus 6P")) {
+            CardView glassCannon = (CardView) findViewById(R.id.glassCannon);
+            glassCannon.setVisibility(View.VISIBLE);
+            glassCannon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setBundled("GlassCannon", R.raw.glasscannon6p);
+                }
+            });
+            CardView ghostPepper = (CardView) findViewById(R.id.ghostPepper);
+            ghostPepper.setVisibility(View.VISIBLE);
+            ghostPepper.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setBundled("GhostPepper", R.raw.ghostpepper6p);
+                }
+            });
+            CardView drunkSauceLite = (CardView) findViewById(R.id.drunkSauceLite);
+            drunkSauceLite.setVisibility(View.VISIBLE);
+            drunkSauceLite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setBundled("DrunkSauce Lite", R.raw.drunksaucelite6p);
+                }
+            });
+            CardView wingoku = (CardView) findViewById(R.id.wingoku);
+            wingoku.setVisibility(View.VISIBLE);
+            wingoku.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setBundled("Wingoku", R.raw.wingoku);
+                }
+            });
+        }
     }
 
 }

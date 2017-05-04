@@ -16,6 +16,13 @@
     <!-- Profiles and Authors -->
     <string name="glassfish">GlassFish 1.2</string>
     <string name="sonicron">Created by soniCron</string>
+    <string name="glasscannon">GlassCannon</string>
+    <string name="phantom">Created by phantom146</string>
+    <string name="ghostpepper">GhostPepper</string>
+    <string name="drunksaucelite">DrunkSauce Lite</string>
+    <string name="alcolawl">Created by Alcolawl</string>
+    <string name="wingoku">Wingoku</string>
+    <string name="fpaste">Created by fpaste</string>
 
     <!-- Shared Preferences -->
     <string name="onBoot">false</string>
