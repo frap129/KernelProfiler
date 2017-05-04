@@ -444,7 +444,7 @@ public class MainActivity extends AppCompatActivity {
         String curProfile = "Current Profile: " + name;
         info.setText(curProfile);
         info.setTextSize(20);
-        snack("Profile applied!");
+        snack(name + " applied!");
     }
 
     // Method that handles device and creates cards
@@ -479,7 +479,7 @@ public class MainActivity extends AppCompatActivity {
             wingoku.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    setBundled("Wingoku", R.raw.wingoku);
+                    setBundled("Wingoku 4.1", R.raw.wingoku);
                 }
             });
         }
