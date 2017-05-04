@@ -408,8 +408,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean checkSU() {
         if (!Shell.SU.available()) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this, android.R.style.Theme_Material);
-            dialog.setTitle("Root access not available");
-            dialog.setMessage("Please root your device and/or grant root access to Kernel Profiler.");
+            dialog.setTitle("Superuser not available");
+            dialog.setMessage("Kernel Profiler cannot function without root.");
             dialog.setCancelable(false);
             AlertDialog root = dialog.create();
             root.show();
