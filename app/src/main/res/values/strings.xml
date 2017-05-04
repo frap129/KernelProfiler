@@ -24,6 +24,7 @@
     <string name="alcolawl">Created by Alcolawl</string>
     <string name="wingoku">Wingoku 4.1</string>
     <string name="fpaste">Created by fpaste</string>
+    <string name="maddog">MadDog</string>
 
     <!-- Shared Preferences -->
     <string name="onBoot">false</string>

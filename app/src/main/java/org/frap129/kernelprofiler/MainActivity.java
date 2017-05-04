@@ -472,7 +472,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Method that handles device and creates cards
     private void deviceCards(String device) {
-        if (device.contains("Nexus 6d")) {
+        if (device.contains("Nexus 6P")) {
             CardView glassCannon = (CardView) findViewById(R.id.glassCannon);
             glassCannon.setVisibility(View.VISIBLE);
             glassCannon.setOnClickListener(new View.OnClickListener() {
@@ -503,6 +503,39 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     setBundled("Wingoku 4.1", R.raw.wingoku);
+                }
+            });
+        } else if (device.contains("Nexus 5X")) {
+            CardView glassCannon = (CardView) findViewById(R.id.glassCannon);
+            glassCannon.setVisibility(View.VISIBLE);
+            glassCannon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setBundled("GlassCannon", R.raw.glasscannon5x);
+                }
+            });
+            CardView ghostPepper = (CardView) findViewById(R.id.ghostPepper);
+            ghostPepper.setVisibility(View.VISIBLE);
+            ghostPepper.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setBundled("GhostPepper", R.raw.ghostpepper5x);
+                }
+            });
+            CardView drunkSauceLite = (CardView) findViewById(R.id.drunkSauceLite);
+            drunkSauceLite.setVisibility(View.VISIBLE);
+            drunkSauceLite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setBundled("DrunkSauce Lite", R.raw.drunksaucelite5x);
+                }
+            });
+            CardView madDog = (CardView) findViewById(R.id.madDog);
+            madDog.setVisibility(View.VISIBLE);
+            madDog.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setBundled("MadDog", R.raw.maddog5x);
                 }
             });
         }
