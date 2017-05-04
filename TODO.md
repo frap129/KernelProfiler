@@ -1,3 +1,4 @@
 ## To do list
-* Show File name in profile dialog
-* Add dynamic filename snackbar after apply
+* Add apply on boot notification
+* Add apply on boot delay
+* Clean up and comment
