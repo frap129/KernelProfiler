@@ -146,8 +146,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Context context = this;
+
         // Create device specific profile cards
-        deviceCards(android.os.Build.MODEL);
+        deviceCards(context, android.os.Build.MODEL);
     }
 
     @Override
@@ -471,7 +473,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Method that handles device and creates cards
-    private void deviceCards(String device) {
+    private void deviceCards(Context context, String device) {
         if (device.contains("Nexus 6P")) {
             CardView glassCannon = (CardView) findViewById(R.id.glassCannon);
             glassCannon.setVisibility(View.VISIBLE);
@@ -538,13 +540,46 @@ public class MainActivity extends AppCompatActivity {
                     setBundled("MadDog", R.raw.maddog5x);
                 }
             });
-        } else if (device.contains("Nexus G4")) {
+        } else if (device.contains("LG G4")) {
             CardView glassCannon = (CardView) findViewById(R.id.glassCannon);
             glassCannon.setVisibility(View.VISIBLE);
             glassCannon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     setBundled("GlassCannon", R.raw.glasscannon5x);
+                }
+            });
+        } else if (device.contains("Nextbit Robin")) {
+            CardView glassCannon = (CardView) findViewById(R.id.glassCannon);
+            glassCannon.setVisibility(View.VISIBLE);
+            glassCannon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setBundled("GlassCannon", R.raw.glasscannon5x);
+                }
+            });
+            CardView ghostPepper = (CardView) findViewById(R.id.ghostPepper);
+            ghostPepper.setVisibility(View.VISIBLE);
+            ghostPepper.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setBundled("GhostPepper", R.raw.ghostpepper5x);
+                }
+            });
+            CardView drunkSauceLite = (CardView) findViewById(R.id.drunkSauceLite);
+            drunkSauceLite.setVisibility(View.VISIBLE);
+            drunkSauceLite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setBundled("DrunkSauce Lite", R.raw.drunksaucelite5x);
+                }
+            });
+            CardView madDog = (CardView) findViewById(R.id.madDog);
+            madDog.setVisibility(View.VISIBLE);
+            madDog.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setBundled("MadDog", R.raw.maddog5x);
                 }
             });
         }
