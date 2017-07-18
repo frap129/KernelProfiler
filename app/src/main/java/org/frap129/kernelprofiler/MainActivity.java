@@ -45,7 +45,7 @@ import static java.lang.System.in;
 public class MainActivity extends AppCompatActivity {
 
     private static final int SELECT_FILE = 1;
-    static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
+    private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -385,21 +385,21 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             }
+            default:
+                break;
         }
     }
 
     //Thanks: http://codetheory.in/android-pick-select-image-from-gallery-with-intents/
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == SELECT_FILE) {
-                Uri selectedFileUri = data.getData();
-                String selectedFilePath = getPath(this, selectedFileUri);
-                if (selectedFilePath != null) {
-                    profileDialog(selectedFilePath);
-                } else {
-                    snack("Invalid file path");
-                }
+        if (resultCode == RESULT_OK && requestCode == SELECT_FILE) {
+            Uri selectedFileUri = data.getData();
+            String selectedFilePath = getPath(this, selectedFileUri);
+            if (selectedFilePath != null) {
+                profileDialog(selectedFilePath);
+            } else {
+                snack("Invalid file path");
             }
         }
     }
